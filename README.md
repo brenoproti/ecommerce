@@ -30,7 +30,7 @@ Certifique-se de ter os seguintes pré-requisitos instalados em seu sistema:
 2. Inicie o servidor de desenvolvimento do frontend:
 
     ```bash
-    npm start
+    ng serve
     ```
 
     O aplicativo estará disponível em `http://localhost:4200`.
@@ -48,6 +48,15 @@ Certifique-se de ter os seguintes pré-requisitos instalados em seu sistema:
 
     ```bash
     npm run start:dev
+    ```
+
+    O aplicativo estará disponível em `http://localhost:3000`.
+    
+    
+3. Banco de dados:
+
+    ```bash
+    docker compose up -d
     ```
 
     O aplicativo estará disponível em `http://localhost:3000`.
