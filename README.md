@@ -16,26 +16,18 @@ O projeto de ecommerce permite:
 Certifique-se de ter os seguintes pré-requisitos instalados em seu sistema:
 
 - Node.js 18.x: Você pode baixar e instalar o Node.js a partir do [site oficial](https://nodejs.org/).
-- Docker: O backend NestJS é executado em um contêiner Docker, portanto, certifique-se de ter o Docker instalado em seu sistema se desejar executar o backend usando Docker.
 
 ## Instalação e Execução
 
 ### Frontend (Angular)
 
-1. Clone este repositório e navegue até o diretório do frontend:
-
-    ```bash
-    git clone https://github.com/seu-usuario/ecommerce.git
-    cd ecommerce/frontend
-    ```
-
-2. Instale as dependências do projeto usando o npm:
+1. Instale as dependências do projeto usando o npm:
 
     ```bash
     npm install
     ```
 
-3. Inicie o servidor de desenvolvimento do frontend:
+2. Inicie o servidor de desenvolvimento do frontend:
 
     ```bash
     npm start
@@ -45,20 +37,20 @@ Certifique-se de ter os seguintes pré-requisitos instalados em seu sistema:
 
 ### Backend (NestJS)
 
-1. Navegue até o diretório do backend:
+
+1. Instale as dependências do projeto usando o npm:
 
     ```bash
-    cd ../backend
+    npm install
     ```
 
-2. Execute o backend usando Docker Compose:
+2. Inicie o servidor de desenvolvimento do frontend:
 
     ```bash
-    docker-compose up --build
+    npm run start:dev
     ```
 
-    O backend estará disponível em `http://localhost:3000`.
-
+    O aplicativo estará disponível em `http://localhost:3000`.
 ## Contribuindo
 
 Se você encontrar algum problema ou tiver sugestões de melhorias, sinta-se à vontade para abrir uma issue ou enviar um pull request.
