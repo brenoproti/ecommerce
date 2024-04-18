@@ -1,0 +1,24 @@
+<p-card *ngIf="combo">
+    <div class="p-4">
+        <div class="flex flex-wrap align-items-center justify-content-between gap-2">
+            <div class="text-2xl font-bold">{{ combo.name }}</div>
+            <div>{{ combo.description }}</div>
+        </div>
+
+        <div class="py-5">
+            <div class="text-1xl font-bold">Esse pacote inclui:</div>
+            <div *ngFor="let service of combo.services" class="flex flex-column gap-3">
+                <div>
+                    <span class="text-2xl font-bold">+</span>{{ service.name }}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="flex align-items-center justify-content-between">
+            <span class="text-2xl font-semibold">{{ combo.price | currency: 'BRL' }}</span>
+            <button *ngIf="!isItemAlreadyInCart" class="p-button" icon="pi pi-cart-plus" pTooltip="Adicionar ao carrinho" tooltipPosition="top" pButton (click)="addComboToCart()"></button>
+            <button *ngIf="isItemAlreadyInCart" severity="danger" class="p-button" icon="pi pi-cart-minus" pTooltip="Remover do carrinho" tooltipPosition="top"  pButton (click)="removeComboFromCart()"></button>
+        </div>
+    </div>
+</p-card>

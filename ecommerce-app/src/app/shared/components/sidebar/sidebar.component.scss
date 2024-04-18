@@ -1,0 +1,10 @@
+.layout-menu {
+   width: 100%;
+}
+
+::ng-deep .p-menu {
+    width: 100% !important;
+    border: none !important;
+}
+
+

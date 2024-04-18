@@ -1,0 +1,63 @@
+<div class="grid">
+    <div class="col-12">
+        <p-card header="Resumo da compra">
+            <div *ngIf="this.shoppingCart; else emptyCart ">
+                <p-panel header="Produtos" *ngIf="shoppingCart?.products && shoppingCart?.products?.length">
+                    <div *ngFor="let product of shoppingCart?.products" class="py-2">
+                        <div class="font-semibold">{{ product.name }}</div>
+                        <div class="flex align-items-center justify-content-between">
+                            <span class="text-2xl">{{ getProductPrice(product) | currency: 'BRL' }}</span>
+
+                            <div class="flex flex-column align-items-center gap-3">
+                                <p-button severity="danger" icon="pi pi-cart-minus" size="small" pTooltip="Remover do carrinho" tooltipPosition="left" (click)="removeFromCart(product, 'product')"></p-button>
+
+                                <p-dropdown [options]="getProductQuantities(product)" [(ngModel)]="product.quantity" (onChange)="updateProductQuantity(product)"></p-dropdown>
+                            </div>
+                        </div>
+                        <p-divider />
+                    </div>
+                </p-panel>
+
+                <div class="my-3" *ngIf="shoppingCart?.services && shoppingCart?.services?.length">
+                    <p-panel header="Serviços" >
+                        <div *ngFor="let service of shoppingCart?.services" class="py-2">
+                            <div class="font-semibold">{{ service.name }}</div>
+                            <div class="flex align-items-center justify-content-between">
+                                <span class="text-2xl">{{ service.price | currency: 'BRL' }}</span>
+                                <p-button severity="danger" icon="pi pi-cart-minus" size="small" pTooltip="Remover do carrinho" tooltipPosition="left" (click)="removeFromCart(service, 'service')"></p-button>
+                            </div>
+                            <p-divider />
+                        </div>
+                    </p-panel>
+                </div>
+
+                <p-panel header="Combos" *ngIf="shoppingCart?.combos && shoppingCart?.combos?.length">
+                    <div *ngFor="let combo of shoppingCart?.combos" class="py-2">
+                        <div class="font-semibold">{{ combo.name }}</div>
+                        <div class="flex align-items-center justify-content-between">
+                            <span class="text-2xl">{{ combo.price | currency: 'BRL' }}</span>
+                            <p-button severity="danger" icon="pi pi-cart-minus" size="small" pTooltip="Remover do carrinho" tooltipPosition="left" (click)="removeFromCart(combo, 'combo')"></p-button>
+                        </div>
+                        <p-divider />
+                    </div>
+                </p-panel>
+
+                <div class="mt-5 text-center flex justify-content-between">
+                    <span class="text-3xl font-bold text-900">Total:</span>
+                    <span class="text-3xl font-bold text-900">{{ getTotalPrice() | currency: 'BRL' }}</span>
+                </div>
+
+                <p-divider />
+
+                <div class="col-12  mt-5">
+                    <p-button  icon="pi pi-shopping-cart" label="Finalizar compra" (click)="save()"></p-button>
+                </div>
+            </div>
+
+            <ng-template #emptyCart>
+                <p class="text-2xl font-semibold">Carrinho de compras está vazio</p>
+                <p class="text-1xl">Para finalizar a compra é necessário adicionar produtos, serviços ou combos ao carrinho</p>
+            </ng-template>
+        </p-card>
+    </div>
+</div>

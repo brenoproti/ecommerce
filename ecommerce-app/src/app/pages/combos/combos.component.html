@@ -1,0 +1,42 @@
+<div class="grid">
+    <div class="col-12">
+        <p-card header="Combos">
+            <p-dataView #dataView [value]="combos" [layout]="'grid'" [sortField]="sortField" [sortOrder]="sortOrder" [paginator]="true" [first]="first" [totalRecords]="totalRecords" [rows]="1"  [lazy]="true" (onLazyLoad)="findCombos($event, false)" emptyMessage=" ">
+                <ng-template pTemplate="header">
+                    <div class="flex flex-column md:flex-row md:justify-content-between">
+                        <form class="mt-3" [formGroup]="form" (ngSubmit)="findCombos(null, true)">
+                            <p-inputMask mask="99.999-999" placeholder="CEP" class="mr-3" unmask formControlName="zipCode"></p-inputMask>
+                            <p-button icon="pi pi-search" type="submit"></p-button>
+                        </form>
+                        <p-button label="Não sei o CEP" [link]="true" (click)="openFindZipCodeLink()"></p-button>
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="grid" let-combos>
+
+                    <div class="grid grid-nogutter mt-3">
+                        <div class="col-12">
+                            <div *ngIf="zipCodeSearch; else blankZipCode">
+                                <span class="font-bold text-2xl">Exibindo resultados para o CEP {{zipCodeSearch}}</span>
+                            </div>
+
+                            <ng-template #blankZipCode>
+                                <div class="grid">
+                                    <div class="col-12">
+                                        <span class="font-bold text-1xl">Informe o CEP para validar a cobertura</span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </div>
+
+                        <div *ngFor="let combo of combos" class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
+                            <app-combo [combo]="combo" type="grid"/>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-dataView>
+        </p-card>
+    </div>
+</div>
+
+<p-toast></p-toast>

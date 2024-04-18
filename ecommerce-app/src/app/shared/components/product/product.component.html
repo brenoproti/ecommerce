@@ -1,0 +1,51 @@
+<p-card *ngIf="product && type == 'list'" >
+    <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+        <img class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" *ngIf="product.image"
+             [src]="product.image" [alt]="product.name"/>
+        <div
+            class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+            <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                <div class="text-2xl font-bold text-900">{{ product.name }}</div>
+                <div class="mb-2">{{ product.description }}</div>
+                <div class="flex align-items-center gap-3">
+                    <span class="flex align-items-center gap-2">
+                        <i class="pi pi-tag"></i>
+                        <span class="font-semibold">{{ product.category }}</span>
+                    </span>
+                    <p-tag [value]="getProductStatus(product)" [severity]="getSeverity(product)"></p-tag>
+                </div>
+            </div>
+            <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
+                <span class="text-2xl font-semibold">{{ product.price  * this.quantity | currency: 'BRL' }}</span>
+                <p-dropdown *ngIf="product.stockQuantity" [options]="getProductQuantities(product)" [(ngModel)]="product.quantity" [disabled]="isItemAlreadyInCart"></p-dropdown>
+                <button *ngIf="!isItemAlreadyInCart && product.stockQuantity" pButton icon="pi pi-cart-plus" class="md:align-self-end mb-2 p-button" label="Adicionar ao carrinho"(click)="addProductToCart()"></button>
+                <button *ngIf="isItemAlreadyInCart" severity="danger" pButton icon="pi pi-cart-minus" class="md:align-self-end mb-2 p-button" label="Remover do carrinho" (click)="removeProductFromCart()"></button>
+            </div>
+        </div>
+    </div>
+</p-card>
+
+<p-card *ngIf="product && type == 'grid'">
+    <div class="p-4">
+        <div class="flex flex-wrap align-items-center justify-content-between gap-2">
+            <span class="flex align-items-center gap-2">
+                <i class="pi pi-tag"></i>
+                <span class="font-semibold">{{ product.category }}</span>
+            </span>
+            <p-tag [value]="getProductStatus(product)" [severity]="getSeverity(product)"></p-tag>
+        </div>
+        <div class="flex flex-column align-items-center gap-3 py-5">
+            <img *ngIf="product.image" class="w-9 shadow-2 border-round" [src]="product.image"
+                 [alt]="product.name"/>
+            <div class="text-2xl font-bold">{{ product.name }}</div>
+            <div>{{ product.description }}</div>
+        </div>
+        <div class="flex align-items-center justify-content-between">
+            <span class="text-2xl font-semibold">{{ product.price | currency: 'BRL' }}</span>
+            <p-dropdown *ngIf="product.stockQuantity" [options]="getProductQuantities(product)" [(ngModel)]="quantity" [disabled]="isItemAlreadyInCart"></p-dropdown>
+
+            <button *ngIf="!isItemAlreadyInCart && product.stockQuantity" pButton icon="pi pi-cart-plus" class="p-button" (click)="addProductToCart()" pTooltip="Adicionar ao carrinho" tooltipPosition="top"></button>
+            <button *ngIf="isItemAlreadyInCart" pButton icon="pi pi-cart-minus"  severity="danger" class="p-button" (click)="removeProductFromCart()" pTooltip="Remover do carrinho" tooltipPosition="top"></button>
+        </div>
+    </div>
+</p-card>

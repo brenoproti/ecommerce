@@ -1,0 +1,13 @@
+<div class="layout-container layout-static" [ngClass]="{'layout-static-inactive': !sidebarOpen, 'layout-mobile-active': sidebarOpen && isMobile}">
+    <app-sidebar class="layout-sidebar"></app-sidebar>
+
+    <div class="layout-content-wrapper">
+        <div class="layout-content layout-static">
+            <app-topbar (sidebarToggled)="toggleSidebar()"></app-topbar>
+
+            <router-outlet/>
+        </div>
+    </div>
+
+    <div class="layout-mask" (click)="toggleSidebar()"></div>
+</div>
